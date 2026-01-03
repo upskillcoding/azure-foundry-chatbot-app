@@ -1,5 +1,8 @@
 ﻿
+using Chatbot;
 using Chatbot.Configuration;
+using Chatbot.Interfaces;
+using Chatbot.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
@@ -28,6 +31,9 @@ class Program
             // Setup dependency injection
             var serviceProvider = ConfigureServices(config);
 
+            // Run the chatbot
+            var chatbot = serviceProvider.GetRequiredService<ChatbotClient>();
+            await chatbot.RunChatLoopAsync();
 
             Log.Information("Application shutting down normally");
         }
@@ -56,6 +62,19 @@ class Program
         // Register logger
         services.AddSingleton<ILogger>(Log.Logger);
 
+        // Register services
+        services.AddSingleton<IConsoleService, ConsoleService>();
+        services.AddSingleton<IChatService, ChatService>();
+        services.AddSingleton<IConversationService, ConversationService>();
+        services.AddSingleton<ICommandHandler>(sp => new CommandHandler(
+            sp.GetRequiredService<IConversationService>(),
+            sp.GetRequiredService<IConsoleService>(),
+            sp.GetRequiredService<IChatService>(),
+            sp.GetRequiredService<ILogger>()
+        ));
+
+        // Register main client
+        services.AddSingleton<ChatbotClient>();
 
         return services.BuildServiceProvider();
     }

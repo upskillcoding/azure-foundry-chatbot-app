@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Chatbot-App (.NET)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "Chatbot-App/bin/Debug/net9.0/Chatbot-App.dll",
+      "cwd": "Chatbot-App",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    }
+  ]
+}
