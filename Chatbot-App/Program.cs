@@ -10,22 +10,34 @@ class Program
 {
     static async Task Main(string[] args)
     {
+        // Load configuration
+        var config = ConfigurationLoader.Load();
+
+        // Configure logging with dynamic level
+        var logLevel = config.LoggingLevel.ToLower() switch
+        {
+            "verbose" => Serilog.Events.LogEventLevel.Verbose,
+            "debug" => Serilog.Events.LogEventLevel.Debug,
+            "information" => Serilog.Events.LogEventLevel.Information,
+            "warning" => Serilog.Events.LogEventLevel.Warning,
+            "error" => Serilog.Events.LogEventLevel.Error,
+            "fatal" => Serilog.Events.LogEventLevel.Fatal,
+            _ => Serilog.Events.LogEventLevel.Information
+        };
+
         // Configure logging
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information()
-            .WriteTo.Console()
-            .WriteTo.File(
-                path: Path.Combine("logs", "chatbot-.log"),
-                rollingInterval: RollingInterval.Day,
-                retainedFileCountLimit: 7)
-            .CreateLogger();
+              .MinimumLevel.Is(logLevel)
+              .WriteTo.Console()
+              .WriteTo.File(
+                  path: Path.Combine("logs", "chatbot-.log"),
+                  rollingInterval: RollingInterval.Day,
+                  retainedFileCountLimit: 7)
+              .CreateLogger();
 
         try
         {
             Log.Information("Application starting...");
-
-            // Load configuration
-            var config = ConfigurationLoader.Load();
             Log.Information("Configuration loaded successfully");
 
             // Setup dependency injection

@@ -16,6 +16,8 @@ public static class ConfigurationLoader
             MaxOutputTokens = GetEnvVar<int>("MAX_OUTPUT_TOKENS"),
             Temperature = GetEnvVar<float>("TEMPERATURE"),
             TopP = GetEnvVar<float>("TOP_P"),
+            MaxHistoryMessages = GetEnvVar<int>("MAX_HISTORY_MESSAGES"),
+            LoggingLevel = GetEnvVar<string>("LOGGING_LEVEL", "Error"),
             SystemPrompt = GetEnvVar<string>("SYSTEM_PROMPT")
         };
 

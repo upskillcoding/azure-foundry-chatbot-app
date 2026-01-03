@@ -9,5 +9,6 @@ public class ChatbotConfiguration
     public float Temperature { get; set; } = 1.0f;
     public float TopP { get; set; } = 1.0f;
     public int MaxHistoryMessages { get; set; } = 50;
+    public string LoggingLevel { get; set; } = "Error";
     public string SystemPrompt { get; set; } = "You are a helpful assistant. Be concise but thorough in your responses.";
 }

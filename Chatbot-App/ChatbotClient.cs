@@ -112,8 +112,8 @@ public class ChatbotClient
 
         try
         {
-            var a = _conversationService.MessageHistory;
-            var streamingResponse = await _chatService.SendMessageStreamingAsync(a,
+            var streamingResponse = await _chatService.SendMessageStreamingAsync(
+                _conversationService.MessageHistory,
                 cancellationToken);
 
             await foreach (var token in streamingResponse.WithCancellation(cancellationToken))
