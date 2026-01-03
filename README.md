@@ -2,6 +2,9 @@
 
 A .NET 9.0 console application that provides an interactive chat interface with Azure OpenAI models deployed through Azure AI Foundry.
 
+<img width="1122" height="976" alt="Screenshot from 2026-01-03 22-33-35" src="https://github.com/user-attachments/assets/6538be10-4ac1-4c96-ba74-7b6e8ca1dc90" />
+
+
 ## Features
 
 ### Core Functionality
