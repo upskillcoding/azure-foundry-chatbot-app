@@ -12,8 +12,7 @@ A .NET 9.0 console application that provides an interactive chat interface with 
 - **Conversation History**: Automatic message history management with configurable limits
 - **Persistent Logging**: Structured logging with Serilog to console and rotating files
 - **Error Handling**: Comprehensive error handling with user-friendly messages
-- **Retry Logic**: Automatic retry with exponential backoff for transient failures
-
+  
 ### Commands
 - `help`, `/help`, `?` - Display available commands
 - `clear`, `/clear`, `reset` - Clear conversation history
